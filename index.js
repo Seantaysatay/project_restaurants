@@ -28,9 +28,14 @@ async function connect() {
 async function main() {
     let db = await connect();
 
-    app.get('/project_restaurants', async (req, res) => {
+    app.get('/restaurants', async (req, res) => {
         let restaurants = await db.collection('restaurants').find().toArray();
         res.json(restaurants)
+    })
+
+    app.get('/reviews', async (req, res) => {
+        let reviews = await db.collection('reviews').find().toArray();
+        res.json(reviews)
     })
 
 }
@@ -38,7 +43,7 @@ async function main() {
 main();
 
 // START SERVER
-// note: we set port to 8888 so it won't clash with React
+
 app.listen(3000, () => {
     console.log("server has started")
 })
